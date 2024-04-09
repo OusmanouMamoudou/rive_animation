@@ -120,12 +120,12 @@ class _EntryPointState extends State<EntryPoint>
                 });
               },
               riveOnInit: (artboard) {
-                StateMachineController controller = RiveBrain.getRiveController(
+                StateMachineController? controller = RiveBrain.getRiveController(
                   artboard,
                   stateMachine: "State Machine",
                 );
 
-                isSideBarClosed = controller.findSMI("isOpen") as SMIBool;
+                isSideBarClosed = controller!.findSMI("isOpen") as SMIBool;
                 isSideBarClosed.value = true;
               },
             ),
@@ -176,13 +176,13 @@ class _EntryPointState extends State<EntryPoint>
                                 navs.iconSrc,
                                 artboard: navs.artboard,
                                 onInit: (artboard) {
-                                  StateMachineController controller =
+                                  StateMachineController? controller =
                                       RiveBrain.getRiveController(
                                     artboard,
                                     stateMachine: navs.stateMachine,
                                   );
                                   navs.setInput =
-                                      controller.findSMI("active") as SMIBool;
+                                      controller!.findSMI("active") as SMIBool;
                                 },
                               ),
                             ),

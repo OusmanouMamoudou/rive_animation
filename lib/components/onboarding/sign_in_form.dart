@@ -7,7 +7,7 @@ import 'package:rive_animation/screens/entry_point.dart';
 import 'package:rive_animation/utilis/rive_brain.dart';
 
 class SignInForm extends StatefulWidget {
-  const SignInForm({Key? key});
+  const SignInForm({super.key,});
 
   @override
   State<SignInForm> createState() => _SignInFormState();
@@ -74,6 +74,7 @@ class _SignInFormState extends State<SignInForm> {
               Padding(
                 padding: const EdgeInsets.only(top: 8, bottom: 16),
                 child: TextFormField(
+                  keyboardType: TextInputType.emailAddress,
                   validator: (value) =>
                       value!.isEmpty ? "Veuillez saisir votre Email" : null,
                   onSaved: (emailValue) {},
@@ -136,9 +137,9 @@ class _SignInFormState extends State<SignInForm> {
                 child: RiveAnimation.asset(
                   "assets/RiveAssets/check.riv",
                   onInit: (artboard) {
-                    StateMachineController controller =
+                    StateMachineController? controller =
                         RiveBrain.getRiveController(artboard);
-                    check = controller.findSMI("Check") as SMITrigger;
+                    check = controller!.findSMI("Check") as SMITrigger;
                     error = controller.findSMI("Error") as SMITrigger;
                     reset = controller.findSMI("Reset") as SMITrigger;
                   },
@@ -153,9 +154,9 @@ class _SignInFormState extends State<SignInForm> {
             child: RiveAnimation.asset(
               "assets/RiveAssets/confetti.riv",
               onInit: (artboard) {
-                StateMachineController controller =
+                StateMachineController? controller =
                     RiveBrain.getRiveController(artboard);
-                confetti = controller.findSMI("Trigger explosion");
+                confetti = controller?.findSMI("Trigger explosion");
               },
             ),
           ),

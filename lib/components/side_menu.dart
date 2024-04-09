@@ -105,11 +105,29 @@ class _SideMenuState extends State<SideMenu> {
 
   // Function to initialize Rive animation
   void riveOnInit(Artboard artboard, RiveIcon menu) {
-    StateMachineController controller = RiveBrain.getRiveController(
-      artboard,
-      stateMachine: menu.stateMachine,
-    );
+  // Retrieve the StateMachineController from the artboard
+  StateMachineController? controller = RiveBrain.getRiveController(
+    artboard,
+    stateMachine: menu.stateMachine,
+  );
 
-    menu.setInput = controller.findSMI("active") as SMIBool;
+  // Check if the controller is not null before accessing its properties/methods
+  if (controller != null) {
+    // Find the SMIBool with the name "active" in the controller
+    SMIBool? input = controller.findSMI("active") as SMIBool?;
+
+    // Check if the SMIBool input is not null
+    if (input != null) {
+      // Set the input property of the menu
+      menu.setInput = input;
+    } else {
+      // Handle the case when the SMIBool with the name "active" is not found
+      print("Error: SMIBool 'active' not found in the controller.");
+    }
+  } else {
+    // Handle the case when the controller is null
+    print("Error: Failed to retrieve StateMachineController.");
   }
+}
+
 }
